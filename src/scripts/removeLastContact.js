@@ -1,6 +1,5 @@
 import { readContacts } from '../utils/readContacts.js';
-import { PATH_DB } from '../constants/contacts.js';
-import fs from 'node:fs/promises';
+import { writeContacts } from '../utils/writeContacts.js';
 
 export const removeLastContact = async () => {
   const data = await readContacts();
@@ -14,13 +13,7 @@ export const removeLastContact = async () => {
   } else {
     return console.log('помилка данних файлу');
   }
-
-  try {
-    await fs.writeFile(PATH_DB, JSON.stringify(data));
-    console.log('Останній контакт успішно видалено.');
-  } catch (err) {
-    console.error('Помилка додавання даних до файлу:', err);
-  }
+  writeContacts(JSON.stringify(data));
 };
 
 removeLastContact();
