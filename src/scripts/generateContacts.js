@@ -16,12 +16,12 @@ const generateContacts = async (number) => {
     contactsArray.push(createFakeContact());
   }
 
-  try {
-    let summaryContacts;
-    Array.isArray(data)
-      ? (summaryContacts = data.concat(contactsArray))
-      : (summaryContacts = contactsArray);
+  let summaryContacts;
+  Array.isArray(data)
+    ? (summaryContacts = data.concat(contactsArray))
+    : (summaryContacts = contactsArray);
 
+  try {
     await fs.writeFile(PATH_DB, JSON.stringify(summaryContacts));
     console.log('Дані успішно додані до файлу.');
   } catch (err) {
